@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    history
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">Symbol</th>
+              <th scope="col">Shares</th>
+              <th scope="col">Price</th>
+              <th scope="col">Transacted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trade in trades4 %}
+                {% if trade["shares"] > 0 %}
+                    <tr class="table-success">
+                        <td>{{ trade["symbol"] }}</td>
+                        <td>{{ trade["shares"] }}</td>
+                        <td>{{ usd(trade["price"]) }}</td>
+                        <td>{{ trade["transacted"] }}</td>
+                    </tr>
+                {% else %}
+                    <tr class="table-danger">
+                        <td>{{ trade["symbol"] }}</td>
+                        <td>{{ trade["shares"] }}</td>
+                        <td>{{ usd(trade["price"]) }}</td>
+                        <td>{{ trade["transacted"] }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
